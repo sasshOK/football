@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "footballers";
+}
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<h1>Все футболисты</h1>
+
+@foreach (var item in @Model)
+{
+<div style="margin-bottom:30px; height:330px;">
+    <div style=" width:40%; float:left;">
+        <p>Имя: @item.name</p>
+        <p>фамилия: @item.last_name</p>
+        <p>пол:@item.gender</p>
+        <p>дата рождения:@item.date.ToString().Substring(0, 10);</p>
+        <p>название комманды: @item.name_komand</p>
+        <p>страна: @item.country</p>
+
+    </div>
+    <input class="update" type="submit" value="изменить" />
+    <form method="post" action="~/Home/UpFoots" style=" width:40%; float:right; " class="form">
+        <p style="display: none;"> <input type="text" name="id" value=@item.id></p>
+        <p> <input required type="text" name="name" value=@item.name></p>
+        <p> <input type="text" name="last_name" value=@item.last_name></p>
+        <p>
+            <select size="1" name="gender">
+                <option disabled>Выберите пол</option>
+                <option value="муж.">муж.</option>
+                <option value="жен.">жен.</option>
+            </select>
+        </p>
+        <p><input required type="date" name="date" /></p>
+        <p>
+            <select size="1" name="name_komand">
+                <option disabled>Выберите команду</option>
+                @foreach (var kom in ViewBag.komand)
+                {
+                    <option value=@kom.id>@kom.name_komand</option>
+                }
+
+            </select>
+        </p>
+        <p>
+
+            <select size="1" name="country">
+                <option disabled>Выберите страну</option>
+                <option value="Россия">Россия</option>
+                <option value="США">США</option>
+                <option value="Италия">Италия</option>
+
+            </select>
+        </p>
+
+
+        <input type="submit" value="Отправить" />
+    </form>
+</div>
+}
+<script>
+    $('.form').hide();
+    $(".update").click(function () {
+        $(this).siblings('.form').show(500);
+        $(this).hide();
+    }); 
+       
+</script>
+
+
+

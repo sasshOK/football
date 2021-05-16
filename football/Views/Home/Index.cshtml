@@ -1,0 +1,47 @@
+﻿@model Form
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <form asp-controller="Home" asp-action="index" method="post">
+        <p><h2>Имя</h2> <input required type="text" asp-for="name" /></p>
+        <p><h2>Фамилия</h2>  <input required type="text" asp-for="last_name" /></p>
+        <p>
+            <h3>Пол</h3>  
+            <select size="1" asp-for="gender">
+                <option disabled>Выберите пол</option>
+                <option value="муж.">муж.</option>
+                <option value="жен.">жен.</option>
+            </select>
+        </p>
+        <p><h3>Дата рождения</h3> <input required type="date" asp-for="date" /></p>
+        <p>
+            <h3>Выберите команду</h3>
+            <select size="1" asp-for="name_comand" >
+                <option disabled>Выберите команду</option>
+                @foreach (var item in ViewBag.komand)
+                {
+                    <option value=@item.id>@item.name_komand</option>
+                }
+
+            </select>
+            или добавьте новую команду
+            <input type="text" asp-for="name_comand1" />
+        </p>
+        <p>
+            <h2>Страна</h2>
+            <select size="1" asp-for="country">
+                <option disabled>Выберите страну</option>
+                <option value="Россия">Россия</option>
+                <option value="США">США</option>
+                <option value="Италия">Италия</option>
+
+            </select>
+        </p>
+
+
+
+        <button type="submit"> save</button>
+    </form>
+</div>
